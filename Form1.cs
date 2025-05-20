@@ -50,7 +50,8 @@ namespace 辅助包工具
                 "如果产生影响请使用同目录下的gongju_rulesmod.ini替换rulesmod.ini";
 
             richTextBox1.Text = "本程序为起源辅助包的设置程序\r\n" +
-                "本程序为开源项目<>\r\n" +
+                "本程序为开源项目[GitHub地址](https://github.com/LDegit-520/fuzhubaogongju)\r\n" +
+                "详细介绍请前往github产看\r\n" +
                 "起源辅助包作者为\r\n" +
                 "作者：Aaron_Kka(红警diy论坛昵称)\r\n不止黑色（QQ昵称）\r\n作者QQ：3177567813\r\n交流Q群:420102344\r\n" +
                 "本项目作者为\r\n" +
