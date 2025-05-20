@@ -29,6 +29,8 @@ namespace 辅助包工具
         private void InitializeComponent()
         {
             this.fuzhubaobenti = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -41,10 +43,7 @@ namespace 辅助包工具
             this.baocun = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button5 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.fuzhubaobenti.SuspendLayout();
             this.Rulesmod.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -68,6 +67,26 @@ namespace 辅助包工具
             this.fuzhubaobenti.TabIndex = 0;
             this.fuzhubaobenti.TabStop = false;
             this.fuzhubaobenti.Text = "辅助包其他功能设置";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(4, 365);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(240, 50);
+            this.button7.TabIndex = 10;
+            this.button7.Text = "启用增援管理局升星";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(4, 309);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(240, 50);
+            this.button8.TabIndex = 9;
+            this.button8.Text = "禁用增援管理局升星";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button6
             // 
@@ -147,7 +166,7 @@ namespace 辅助包工具
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1180, 552);
+            this.tabPage2.Size = new System.Drawing.Size(1188, 581);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -205,17 +224,6 @@ namespace 辅助包工具
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(4, 668);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(258, 326);
-            this.richTextBox1.TabIndex = 7;
-            this.richTextBox1.Text = "";
-            // 
             // richTextBox2
             // 
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -224,29 +232,9 @@ namespace 辅助包工具
             this.richTextBox2.Location = new System.Drawing.Point(19, 486);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(243, 164);
+            this.richTextBox2.Size = new System.Drawing.Size(243, 508);
             this.richTextBox2.TabIndex = 8;
             this.richTextBox2.Text = "";
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(4, 365);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(240, 50);
-            this.button7.TabIndex = 10;
-            this.button7.Text = "启用增援管理局升星";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(4, 309);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(240, 50);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "禁用增援管理局升星";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Form1
             // 
@@ -255,7 +243,6 @@ namespace 辅助包工具
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1482, 1009);
             this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.baocun);
             this.Controls.Add(this.fuzhubaobenti);
@@ -287,7 +274,6 @@ namespace 辅助包工具
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
