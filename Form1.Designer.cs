@@ -43,6 +43,8 @@ namespace 辅助包工具
             this.button5 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.fuzhubaobenti.SuspendLayout();
             this.Rulesmod.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -53,14 +55,16 @@ namespace 辅助包工具
             // 
             // fuzhubaobenti
             // 
+            this.fuzhubaobenti.Controls.Add(this.button7);
+            this.fuzhubaobenti.Controls.Add(this.button8);
             this.fuzhubaobenti.Controls.Add(this.button6);
             this.fuzhubaobenti.Controls.Add(this.button3);
             this.fuzhubaobenti.Controls.Add(this.button4);
             this.fuzhubaobenti.Controls.Add(this.button2);
             this.fuzhubaobenti.Controls.Add(this.button1);
-            this.fuzhubaobenti.Location = new System.Drawing.Point(19, 74);
+            this.fuzhubaobenti.Location = new System.Drawing.Point(19, 71);
             this.fuzhubaobenti.Name = "fuzhubaobenti";
-            this.fuzhubaobenti.Size = new System.Drawing.Size(250, 332);
+            this.fuzhubaobenti.Size = new System.Drawing.Size(250, 413);
             this.fuzhubaobenti.TabIndex = 0;
             this.fuzhubaobenti.TabStop = false;
             this.fuzhubaobenti.Text = "辅助包其他功能设置";
@@ -77,7 +81,7 @@ namespace 辅助包工具
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(6, 265);
+            this.button3.Location = new System.Drawing.Point(5, 253);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(240, 50);
             this.button3.TabIndex = 7;
@@ -87,7 +91,7 @@ namespace 辅助包工具
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(6, 209);
+            this.button4.Location = new System.Drawing.Point(5, 197);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(240, 50);
             this.button4.TabIndex = 6;
@@ -125,7 +129,7 @@ namespace 辅助包工具
             this.Rulesmod.Location = new System.Drawing.Point(3, 3);
             this.Rulesmod.Name = "Rulesmod";
             this.Rulesmod.SelectedIndex = 0;
-            this.Rulesmod.Size = new System.Drawing.Size(1188, 584);
+            this.Rulesmod.Size = new System.Drawing.Size(1196, 613);
             this.Rulesmod.TabIndex = 3;
             // 
             // tabPage1
@@ -133,7 +137,7 @@ namespace 辅助包工具
             this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1180, 552);
+            this.tabPage1.Size = new System.Drawing.Size(1188, 581);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -155,13 +159,13 @@ namespace 辅助包工具
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RText.Location = new System.Drawing.Point(7, 3);
             this.RText.Name = "RText";
-            this.RText.Size = new System.Drawing.Size(1180, 338);
+            this.RText.Size = new System.Drawing.Size(1195, 356);
             this.RText.TabIndex = 4;
             this.RText.Text = "";
             // 
             // baocun
             // 
-            this.baocun.Location = new System.Drawing.Point(27, 15);
+            this.baocun.Location = new System.Drawing.Point(26, 12);
             this.baocun.Name = "baocun";
             this.baocun.Size = new System.Drawing.Size(238, 53);
             this.baocun.TabIndex = 5;
@@ -186,14 +190,14 @@ namespace 辅助包工具
             // 
             this.splitContainer1.Panel2.Controls.Add(this.button5);
             this.splitContainer1.Panel2.Controls.Add(this.RText);
-            this.splitContainer1.Size = new System.Drawing.Size(1194, 938);
-            this.splitContainer1.SplitterDistance = 590;
+            this.splitContainer1.Size = new System.Drawing.Size(1202, 985);
+            this.splitContainer1.SplitterDistance = 619;
             this.splitContainer1.TabIndex = 6;
             // 
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(1093, 3);
+            this.button5.Location = new System.Drawing.Point(1105, 3);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(94, 57);
             this.button5.TabIndex = 5;
@@ -206,9 +210,9 @@ namespace 辅助包工具
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(4, 609);
+            this.richTextBox1.Location = new System.Drawing.Point(4, 668);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(258, 338);
+            this.richTextBox1.Size = new System.Drawing.Size(258, 326);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -217,19 +221,39 @@ namespace 辅助包工具
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Location = new System.Drawing.Point(19, 413);
+            this.richTextBox2.Location = new System.Drawing.Point(19, 486);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(243, 190);
+            this.richTextBox2.Size = new System.Drawing.Size(243, 164);
             this.richTextBox2.TabIndex = 8;
             this.richTextBox2.Text = "";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(4, 365);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(240, 50);
+            this.button7.TabIndex = 10;
+            this.button7.Text = "启用增援管理局升星";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(4, 309);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(240, 50);
+            this.button8.TabIndex = 9;
+            this.button8.Text = "禁用增援管理局升星";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1474, 962);
+            this.ClientSize = new System.Drawing.Size(1482, 1009);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.splitContainer1);
@@ -265,6 +289,8 @@ namespace 辅助包工具
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 

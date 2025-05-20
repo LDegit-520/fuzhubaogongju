@@ -54,7 +54,8 @@ namespace 辅助包工具
                 "只有存在本程序适配的rulesmod.ini时本程序才会起作用\r\n" +
                 "只有存在rulesmo.ini时禁用和启用起源才可使用" +
                 "程序运行中出现崩溃一般来说不会影响rulesmod.ini\r\n" +
-                "如果产生影响请使用同目录下的gongju_rulesmod.ini替换rulesmod.ini";
+                "如果产生影响请使用同目录下的gongju_rulesmod.ini替换rulesmod.ini\r\n" +
+                "备份为每启动一次本程序备份一次";
 
             richTextBox1.Text = "本程序为起源辅助包的设置程序\r\n" +
                 "本程序为开源项目[GitHub地址](https://github.com/LDegit-520/fuzhubaogongju)\r\n" +
@@ -116,12 +117,22 @@ namespace 辅助包工具
 
         private void button4_Click(object sender, EventArgs e)
         {
-            rulesmod.xianzhiAll();
+            rulesmod.JiechuAll();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            rulesmod.JiechuAll();
+            rulesmod.xianzhiAll();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            rulesmod.jin_shengxing();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            rulesmod.jie_shengxing();
         }
     }
 

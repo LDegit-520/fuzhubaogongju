@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace 辅助包工具.core
@@ -76,6 +77,11 @@ namespace 辅助包工具.core
         {
             if(File.Exists(Path.Combine(Data.exepath, "rulesmod.ini")))
             {
+                if(File.Exists(Path.Combine(Data.exepath, "gongju_rulesmod.ini")))//删除原备份
+                {
+                    File.Delete(Path.Combine(Data.exepath, "gongju_rulesmod.ini"));
+                }
+                File.Copy(Path.Combine(Data.exepath, "rulesmod.ini"), Path.Combine(Data.exepath, "gongju_rulesmod.ini"));//添加备份
                 strings = File.ReadAllLines(Path.Combine(Data.exepath, "rulesmod.ini")).ToList();
             }
         }
@@ -97,9 +103,9 @@ namespace 辅助包工具.core
         {
             for (int i = 0; i < strings.Count; i++)
             {
-                strings[i] = strings[i].Replace(BuildLimit, $";{BuildLimit}");
-                strings[i] = strings[i].Replace(Cloneable, $";{Cloneable}");
-                strings[i] = strings[i].Replace(SW_Shots, $";{SW_Shots}");
+                strings[i] = Regex.Replace( strings[i], $@"(?<!;){Regex.Escape(BuildLimit)}", $";{BuildLimit}");
+                strings[i] = Regex.Replace( strings[i], $@"(?<!;){Regex.Escape(Cloneable)}", $";{Cloneable}" );
+                strings[i] = Regex.Replace( strings[i], $@"(?<!;){Regex.Escape(SW_Shots)}", $";{SW_Shots}" );
             }
         }
         /// <summary>
@@ -172,6 +178,39 @@ namespace 辅助包工具.core
             for (int i = 0; i < strings.Count; i++)
             {
                 strings[i] = strings[i].Replace($";{SW_Shots}", SW_Shots);
+            }
+        }
+        #endregion
+        #region 增援管理局升星
+        static string zhengyuanjie = "[SUPRTX]";
+        static string zhengyuan_bubing = "Academy.InfantryVeterancy=2.0";
+        static string zhengyuan_fexing = "Academy.AircraftVeterancy=2.0";
+        static string zhengyuan_zaiju = "Academy.VehicleVeterancy=2.0";
+        static string zhengyuan_jianzhu = "Academy.BuildingVeterancy=2.0";
+        /// <summary>
+        /// 禁用升星
+        /// </summary>
+        public static void jin_shengxing()
+        {
+            for (int i = 0; i < strings.Count; i++)
+            {
+                strings[i] = Regex.Replace(strings[i], $@"(?<!;){Regex.Escape(zhengyuan_bubing)}", $";{zhengyuan_bubing}");
+                strings[i] = Regex.Replace(strings[i], $@"(?<!;){Regex.Escape(zhengyuan_fexing)}", $";{zhengyuan_fexing}");
+                strings[i] = Regex.Replace(strings[i], $@"(?<!;){Regex.Escape(zhengyuan_zaiju)}", $";{zhengyuan_zaiju}");
+                strings[i] = Regex.Replace(strings[i], $@"(?<!;){Regex.Escape(zhengyuan_jianzhu)}", $";{zhengyuan_jianzhu}");
+            }
+        }
+        /// <summary>
+        /// 解除禁用升星
+        /// </summary>
+        public static void jie_shengxing()
+        {
+            for (int i = 0; i < strings.Count; i++)
+            {
+                strings[i] = strings[i].Replace($";{zhengyuan_bubing}", zhengyuan_bubing);
+                strings[i] = strings[i].Replace($";{zhengyuan_fexing}", zhengyuan_fexing);
+                strings[i] = strings[i].Replace($";{zhengyuan_zaiju}", zhengyuan_zaiju);
+                strings[i] = strings[i].Replace($";{zhengyuan_jianzhu}", zhengyuan_jianzhu);
             }
         }
         #endregion
@@ -437,7 +476,7 @@ namespace 辅助包工具.core
                 {
                     strings[i] =line.Replace(";3=OriginAI.ini", "3=OriginAI.ini");//解除注释
                 }
-                if(line.IndexOf("[General]") ==-1)//及时停止，防止性能损耗
+                if(line.IndexOf("[General]") !=-1)//及时停止，防止性能损耗
                 {
                     break;
                 }
@@ -460,7 +499,7 @@ namespace 辅助包工具.core
                 {
                     strings[i] = line.Replace(";4=PartOriginAI.ini", "4=PartOriginAI.ini");//解除注释
                 }
-                if (line.IndexOf("[General]") == -1)//及时停止，防止性能损耗
+                if (line.IndexOf("[General]") != -1)//及时停止，防止性能损耗
                 {
                     break;
                 }
@@ -484,11 +523,11 @@ namespace 辅助包工具.core
             for (int i = 0; i < strings.Length; i++)
             {
                 string line = strings[i];
-                if (line.IndexOf("3=OriginAI.ini") != -1)
+                if (line.IndexOf("3=OriginAI.ini") != -1&&line.IndexOf(";3=OriginAI.ini") ==-1)
                 {
                     strings[i] = line.Replace("3=OriginAI.ini", ";3=OriginAI.ini");//添加注释
                 }
-                if (line.IndexOf("[General]") == -1)//及时停止，防止性能损耗
+                if (line.IndexOf("[General]") != -1)//及时停止，防止性能损耗
                 {
                     break;
                 }
@@ -506,11 +545,11 @@ namespace 辅助包工具.core
             for (int i = 0; i < strings.Length; i++)
             {
                 string line = strings[i];
-                if (line.IndexOf("4=PartOriginAI.ini") != -1)
+                if (line.IndexOf("4=PartOriginAI.ini") != -1&&line.IndexOf(";4=PartOriginAI.ini") ==-1)
                 {
                     strings[i] = line.Replace("4=PartOriginAI.ini", ";4=PartOriginAI.ini");//添加注释
                 }
-                if (line.IndexOf("[General]") == -1)//及时停止，防止性能损耗
+                if (line.IndexOf("[General]") != -1)//及时停止，防止性能损耗
                 {
                     break;
                 }
