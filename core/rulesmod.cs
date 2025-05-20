@@ -386,7 +386,15 @@ namespace 辅助包工具.core
     /// </summary>
     class rulesmo
     {
-        static string[] strings =null;
+        public static string[] strings =null;
+        static rulesmo()
+        {
+            if (File.Exists((Path.Combine(Data.exepath, "rulesmo.ini"))))
+            {
+                strings = File.ReadAllLines(Path.Combine(Data.exepath, "rulesmo.ini"));
+            }
+        }
+        
         /// <summary>
         /// 禁用全部起源
         /// </summary>
@@ -404,7 +412,7 @@ namespace 辅助包工具.core
         /// </summary>
         public static void Save()
         {
-            File.WriteAllLines(Path.Combine(Data.exepath), strings);
+            File.WriteAllLines(Path.Combine(Data.exepath,"rulesmo.ini"), strings);
         }
         /// <summary>
         /// 启用起源

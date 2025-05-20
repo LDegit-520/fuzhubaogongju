@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="core\Data.cs" />
-    <Compile Include="core\fuzhubao_kaiguan.cs" />
     <Compile Include="core\rulesmod.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

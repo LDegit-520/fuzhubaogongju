@@ -21,6 +21,12 @@ namespace 辅助包工具
             InitializeComponent();
             Richtextbox = RText;
             Rulesmod.TabPages.Clear();
+            if(rulesmo.strings==null)
+            {
+                button1.Enabled = false;
+                button2.Enabled = false;
+                button6.Enabled = false;
+            }
             if (rulesmod.strings.Count!=0)//存在数据
             {
                 RulesTest = rulesmod.DisRules();
@@ -46,6 +52,7 @@ namespace 辅助包工具
             richTextBox2.Text = "在修改完成后请必须点击保存否则不会产生作用\r\n\r\n" +
                 "本程序运行时必须存在rulesmod.ini否则全部功能均会被禁用\r\n" +
                 "只有存在本程序适配的rulesmod.ini时本程序才会起作用\r\n" +
+                "只有存在rulesmo.ini时禁用和启用起源才可使用" +
                 "程序运行中出现崩溃一般来说不会影响rulesmod.ini\r\n" +
                 "如果产生影响请使用同目录下的gongju_rulesmod.ini替换rulesmod.ini";
 
@@ -62,6 +69,7 @@ namespace 辅助包工具
         private void button5_Click(object sender, EventArgs e)
         {
             rulesmod.Save();
+            rulesmo.Save();
             Richtextbox.Text= string.Join(Environment.NewLine, rulesmod.strings);
             MessageBox.Show("保存成功","提示");
         }
