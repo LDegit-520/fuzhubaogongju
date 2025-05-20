@@ -6,6 +6,9 @@
 
 本程序为开源项目 [GitHub地址](https://github.com/LDegit-520/fuzhubaogongju)
 
+项目代码编写的比较shi（有大量重复性代码，来源于编写时优先实现功能造成，后续会进行修正）（有bug的请qq联系我）
+感觉有用的请帮忙点击一下star
+
 ---
 
 ## 本项目作者为
