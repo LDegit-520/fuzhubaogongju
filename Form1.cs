@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using 辅助包工具.core;
+using static 辅助包工具.core.RulesNode;
 
 namespace 辅助包工具
 {
@@ -61,7 +62,7 @@ namespace 辅助包工具
                 +"在修改完成后请必须点击保存否则不会产生作用\r\n\r\n" +
                 "本程序运行时必须存在rulesmod.ini否则全部功能均会被禁用\r\n" +
                 "只有存在本程序适配的rulesmod.ini时本程序才会起作用\r\n" +
-                "只有存在rulesmo.ini时禁用和启用起源才可使用" +
+                "只有存在rulesmo.ini时禁用和启用起源才可使用\r\n" +
                 "程序运行中出现崩溃一般来说不会影响rulesmod.ini\r\n" +
                 "如果产生影响请使用同目录下的gongju_rulesmod.ini替换rulesmod.ini\r\n" +
                 "备份为每启动一次本程序备份一次";
@@ -142,6 +143,9 @@ namespace 辅助包工具
     /// </summary>
     class RulesPanel
     {
+        static Color R1 = Color.FromArgb(255, 200, 200);
+        static Color G1 = Color.FromArgb(200, 255, 200);
+        static Color B1 = Color.FromArgb(200, 200, 255);
         public static Panel AllPanel(RulesNode rulesNode)
         {
             FlowLayoutPanel mainPanel = new FlowLayoutPanel
@@ -164,11 +168,7 @@ namespace 辅助包工具
             string test = $"{keyValue.Test}";
             string kv_test = $"键值对{keyValue.Key}  {keyValue.Value}";
             string Raw_test = $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";
-            Color R1 = Color.FromArgb(255, 200, 200);
-            Color G1 = Color.FromArgb(200, 255, 200);
-            Color B1= Color.FromArgb(200, 200, 255);
             Color color = B1;
-
             if (keyValue.Type == RulesNode.AN || keyValue.Type == RulesNode.AN1)
             {
                 if (!keyValue.Exist)
@@ -188,6 +188,7 @@ namespace 辅助包工具
                     color=G1;
                 }
             }
+            #region 页面创建
             // 创建主面板
             Panel mainPanel = new Panel
             {
@@ -246,8 +247,8 @@ namespace 辅助包工具
             mainPanel.Controls.Add(bottomPanel);
             mainPanel.Controls.Add(middlePanel);
             mainPanel.Controls.Add(topPanel);
-            
-            if(keyValue.Type==RulesNode.AN)
+            #endregion
+            if (keyValue.Type==RulesNode.AN)
             {
                 contentLabel.Click += (s,e) =>
                 {
@@ -265,17 +266,7 @@ namespace 辅助包工具
                         keyValue.Raw_string = $";{keyValue.Raw_string}";
                         rulesmod.SetRules(keyValue.Raw_int, keyValue.Raw_string);
                     }
-                    //更新界面
-                    if (middlePanel.BackColor == R1)//切换颜色
-                    {
-                        middlePanel.BackColor = G1;
-                    }
-                    else
-                    {
-                        middlePanel.BackColor = R1;
-                    }
-                    contentLabel.Text = $"键值对{keyValue.Key}  {keyValue.Value}";
-                    infoLabel.Text= $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";
+                    jiemiangengxin(keyValue,middlePanel,contentLabel,infoLabel);
 
                 };
             }
@@ -307,28 +298,11 @@ namespace 辅助包工具
                         keyValue.pair.Raw_string = $";{keyValue.pair.Raw_string}";
                         rulesmod.SetRules(keyValue.pair.Raw_int, keyValue.pair.Raw_string);
                     }
-                    //更新界面
-                    if (middlePanel.BackColor == R1)//切换颜色
-                    {
-                        middlePanel.BackColor = G1;
-                    }
-                    else
-                    {
-                        middlePanel.BackColor = R1;
-                    }
-                    contentLabel.Text = $"键值对{keyValue.Key}  {keyValue.Value}";
-                    infoLabel.Text = $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";
+                    jiemiangengxin(keyValue, middlePanel, contentLabel, infoLabel);
                     var pairpanel = ((Panel)keyValue.pair.pair_object);
-                    if (pairpanel.Controls["middlePanel"].BackColor == R1)
-                    {
-                        pairpanel.Controls["middlePanel"].BackColor = G1;
-                    }
-                    else
-                    {
-                        pairpanel.Controls["middlePanel"].BackColor = R1;
-                    }
-                    pairpanel.Controls["middlePanel"].Controls["contentLabel"].Text = $"键值对{keyValue.pair.Key}  {keyValue.pair.Value}";
-                    pairpanel.Controls["bottomPanel"].Controls["infoLabel"].Text = $"原始行:    {keyValue.pair.Raw_int}    {keyValue.pair.Raw_string}";
+                    jiemiangengxin(keyValue.pair, (Panel)pairpanel.Controls["middlePanel"], 
+                        (Label)pairpanel.Controls["middlePanel"].Controls["contentLabel"],
+                        (Label)pairpanel.Controls["bottomPanel"].Controls["infoLabel"]);
                 };
             }
             if(keyValue.Type==RulesNode.ONE)
@@ -339,40 +313,16 @@ namespace 辅助包工具
                     if (keyValue.Value.IndexOf("1")!=-1)
                     {
                         keyValue.Value = keyValue.Value.Replace("1","0");
-                        //定位
-                        int dengyu =keyValue.Raw_string.IndexOf("=");//找到值的开始
-                        int fenge=keyValue.Raw_string.IndexOf(";");//找到标记的开始
-                        string ss1=keyValue.Raw_string.Substring(0,dengyu);
-                        string ss2=keyValue.Raw_string.Substring(dengyu,fenge-dengyu).Replace("1","0");
-                        string ss3 = keyValue.Raw_string.Substring(fenge);
-                        keyValue.Raw_string=ss1+ ss2+ss3;
-                        //
+                        keyValue.Raw_string = Fuzhu_dingwei(keyValue,"1","0");
                         rulesmod.SetRules(keyValue.Raw_int, keyValue.Raw_string);
                     }
                     else
                     {
                         keyValue.Value = keyValue.Value.Replace("0","1");
-                        //定位
-                        int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
-                        int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
-                        string ss1 = keyValue.Raw_string.Substring(0, dengyu);
-                        string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace("0", "1");
-                        string ss3 = keyValue.Raw_string.Substring(fenge);
-                        keyValue.Raw_string = ss1 + ss2 + ss3;
-                        //
+                        keyValue.Raw_string = Fuzhu_dingwei(keyValue,"0","1");
                         rulesmod.SetRules(keyValue.Raw_int, keyValue.Raw_string);
                     }
-                    //更新界面
-                    if (middlePanel.BackColor == R1)//切换颜色
-                    {
-                        middlePanel.BackColor = G1;
-                    }
-                    else
-                    {
-                        middlePanel.BackColor = R1;
-                    }
-                    contentLabel.Text = $"键值对{keyValue.Key}  {keyValue.Value}";
-                    infoLabel.Text = $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";
+                    jiemiangengxin(keyValue, middlePanel, contentLabel, infoLabel);
                 };
             }
             if (keyValue.Type == RulesNode.YN)
@@ -383,40 +333,16 @@ namespace 辅助包工具
                     if (keyValue.Value.IndexOf("yes") != -1)
                     {
                         keyValue.Value = keyValue.Value.Replace("yes", "no");
-                        //定位
-                        int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
-                        int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
-                        string ss1 = keyValue.Raw_string.Substring(0, dengyu);
-                        string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace("yes", "no");
-                        string ss3 = keyValue.Raw_string.Substring(fenge);
-                        keyValue.Raw_string = ss1 + ss2 + ss3;
-                        //
+                        keyValue.Raw_string = Fuzhu_dingwei(keyValue,"yes","no");
                         rulesmod.SetRules(keyValue.Raw_int, keyValue.Raw_string);
                     }
                     else
                     {
                         keyValue.Value = keyValue.Value.Replace("no", "yes");
-                        //定位
-                        int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
-                        int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
-                        string ss1 = keyValue.Raw_string.Substring(0, dengyu);
-                        string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace("no", "yes");
-                        string ss3 = keyValue.Raw_string.Substring(fenge);
-                        keyValue.Raw_string = ss1 + ss2 + ss3;
-                        //
+                        keyValue.Raw_string = Fuzhu_dingwei(keyValue,"no","yes");
                         rulesmod.SetRules(keyValue.Raw_int, keyValue.Raw_string);
                     }
-                    //更新界面
-                    if (middlePanel.BackColor == R1)//切换颜色
-                    {
-                        middlePanel.BackColor = G1;
-                    }
-                    else
-                    {
-                        middlePanel.BackColor = R1;
-                    }
-                    contentLabel.Text = $"键值对{keyValue.Key}  {keyValue.Value}";
-                    infoLabel.Text = $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";
+                    jiemiangengxin(keyValue, middlePanel, contentLabel, infoLabel);
                 };
             }
             if (keyValue.Type == RulesNode.TF)
@@ -428,12 +354,12 @@ namespace 辅助包工具
                     {
                         keyValue.Value = keyValue.Value.Replace("true", "false");
                         //定位
-                        int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
-                        int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
-                        string ss1 = keyValue.Raw_string.Substring(0, dengyu);
-                        string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace("true", "false");
-                        string ss3 = keyValue.Raw_string.Substring(fenge);
-                        keyValue.Raw_string = ss1 + ss2 + ss3;
+                        //int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
+                        //int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
+                        //string ss1 = keyValue.Raw_string.Substring(0, dengyu);
+                        //string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace("true", "false");
+                        //string ss3 = keyValue.Raw_string.Substring(fenge);
+                        keyValue.Raw_string = Fuzhu_dingwei(keyValue,"true","false");
                         //
                         rulesmod.SetRules(keyValue.Raw_int, keyValue.Raw_string);
                     }
@@ -441,26 +367,27 @@ namespace 辅助包工具
                     {
                         keyValue.Value = keyValue.Value.Replace("false", "true");
                         //定位
-                        int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
-                        int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
-                        string ss1 = keyValue.Raw_string.Substring(0, dengyu);
-                        string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace("false", "true");
-                        string ss3 = keyValue.Raw_string.Substring(fenge);
-                        keyValue.Raw_string = ss1 + ss2 + ss3;
+                        //int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
+                        //int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
+                        //string ss1 = keyValue.Raw_string.Substring(0, dengyu);
+                        //string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace("false", "true");
+                        //string ss3 = keyValue.Raw_string.Substring(fenge);
+                        keyValue.Raw_string = Fuzhu_dingwei(keyValue,"false","true");
                         //
                         rulesmod.SetRules(keyValue.Raw_int, keyValue.Raw_string);
                     }
-                    //更新界面
-                    if (middlePanel.BackColor == R1)//切换颜色
-                    {
-                        middlePanel.BackColor = G1;
-                    }
-                    else
-                    {
-                        middlePanel.BackColor = R1;
-                    }
-                    contentLabel.Text = $"键值对{keyValue.Key}  {keyValue.Value}";
-                    infoLabel.Text = $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";
+                    ////更新界面
+                    //if (middlePanel.BackColor == R1)//切换颜色
+                    //{
+                    //    middlePanel.BackColor = G1;
+                    //}
+                    //else
+                    //{
+                    //    middlePanel.BackColor = R1;
+                    //}
+                    //contentLabel.Text = $"键值对{keyValue.Key}  {keyValue.Value}";
+                    //infoLabel.Text = $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";
+                    jiemiangengxin(keyValue, middlePanel, contentLabel, infoLabel);
                 };
             }
             if(keyValue.Type==RulesNode.INTER||keyValue.Type==RulesNode.BANFEN)
@@ -469,20 +396,14 @@ namespace 辅助包工具
                 {
                     using (InputForm inputForm = new InputForm("请输入值", "输入框", keyValue.Value))
                     {
+                        inputForm.StartPosition = FormStartPosition.CenterParent;
                         if (inputForm.ShowDialog() == DialogResult.OK)
                         {
                             string userInput = inputForm.UserInput;
                             int Ival;
                             if (int.TryParse(userInput, out Ival))
                             {
-                                //定位
-                                int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
-                                int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
-                                string ss1 = keyValue.Raw_string.Substring(0, dengyu);
-                                string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace(keyValue.Value, userInput);
-                                string ss3 = keyValue.Raw_string.Substring(fenge);
-                                keyValue.Raw_string = ss1 + ss2 + ss3;
-                                //
+                                keyValue.Raw_string = Fuzhu_dingwei(keyValue,keyValue.Value,userInput);
                                 keyValue.Value = userInput;
                                 rulesmod.SetRules(keyValue.Raw_int, keyValue.Raw_string);
                                 contentLabel.Text = $"键值对{keyValue.Key}  {keyValue.Value}";
@@ -502,7 +423,29 @@ namespace 辅助包工具
             };
             return mainPanel;
         }
-
+        private static string Fuzhu_dingwei(RulesNode.KeyValue keyValue,string str1,string str2)
+        {
+            int dengyu = keyValue.Raw_string.IndexOf("=");//找到值的开始
+            int fenge = keyValue.Raw_string.IndexOf(";");//找到标记的开始
+            string ss1 = keyValue.Raw_string.Substring(0, dengyu);
+            string ss2 = keyValue.Raw_string.Substring(dengyu, fenge - dengyu).Replace(str1, str2);
+            string ss3 = keyValue.Raw_string.Substring(fenge);
+            return  ss1 + ss2 + ss3;
+        }
+        private static void jiemiangengxin(RulesNode.KeyValue keyValue, Panel middlePanel,Label contentLabel,Label infoLabel)
+        {
+            //更新界面
+            if (middlePanel.BackColor == R1)//切换颜色
+            {
+                middlePanel.BackColor = G1;
+            }
+            else
+            {
+                middlePanel.BackColor = R1;
+            }
+            contentLabel.Text = $"键值对{keyValue.Key}  {keyValue.Value}";
+            infoLabel.Text = $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";
+        }
         private static Panel CreateSectionPanel(Color BackgroundColor)
         {
             return new Panel
@@ -545,7 +488,8 @@ namespace 辅助包工具
 
             // 设置窗体标题
             this.Text = title;
-
+            this.ShowIcon = false;
+            this.MaximizeBox = false;
             // 创建标签
             Label labelPrompt = new Label
             {
@@ -570,16 +514,18 @@ namespace 辅助包工具
                 Text = "确定",
                 Left = 20,
                 Top = 75,
-                Width = 80
+                Width = 80,
+                Height = 30
             };
 
             // 创建“取消”按钮
             Button buttonCancel = new Button
             {
                 Text = "取消",
-                Left = 130,
+                Left = 200,
                 Top = 75,
-                Width = 80
+                Width = 80,
+                Height= 30
             };
 
             // 按钮点击事件
@@ -603,8 +549,8 @@ namespace 辅助包工具
             Controls.Add(buttonCancel);
 
             // 设置窗体大小
-            this.Width = 300;
-            this.Height = 150;
+            this.Width = 320;
+            this.Height = 170;
         }
     }
 }

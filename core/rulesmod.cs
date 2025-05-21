@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static 辅助包工具.core.RulesNode;
 
 namespace 辅助包工具.core
 {
@@ -281,39 +282,16 @@ namespace 辅助包工具.core
                 int BJ = line.IndexOf(AN);
                 if (BJ != -1)
                 {
-                    string[] _lines = line.Split(new[] { AN }, StringSplitOptions.None);//分割
-                    RulesNode.KeyValue _keyValue = new RulesNode.KeyValue();
-                    _keyValue.Raw_string = line;
-                    _keyValue.Raw_int = i;
-                    _keyValue.Test = _lines[1];
-                    _keyValue.Type = RulesNode.AN;
-                    _keyValue.Exist = true;
-                    if (_lines[0].IndexOf(";") != -1)
-                    {
-                        _keyValue.Exist = false;
-                    }
-                    _keyValue.Key = string.Empty;
-                    _keyValue.Value = _lines[0];
-                    DanQian.Values.Add(_keyValue);
+                    var _kv = DisRukes_Fuzhu_AN(line, i, AN, RulesNode.AN,out _);
+                    DanQian.Values.Add(_kv);
                     continue;
                 }
                 BJ = line.IndexOf(AN1);
                 if (BJ != -1)
                 {
-                    string[] _lines = line.Split(new[] { AN1 }, StringSplitOptions.None);//分割
-                    RulesNode.KeyValue _keyValue = new RulesNode.KeyValue();
-                    _keyValue.Raw_string = line;
-                    _keyValue.Raw_int = i;
-                    _keyValue.Test = _lines[1];
-                    _keyValue.Type = RulesNode.AN1;
-                    _keyValue.Exist = true;
-                    if (_lines[0].IndexOf(";") != -1)
-                    {
-                        _keyValue.Exist = false;
-                    }
-                    _keyValue.Key = string.Empty;
-                    _keyValue.Value = _lines[0];
-                    DanQian.Values.Add(_keyValue);
+                    string[] _lines;
+                    var _kv = DisRukes_Fuzhu_AN(line,i,AN1,RulesNode.AN1,out _lines);
+                    DanQian.Values.Add(_kv);
 
                     //处理AN1的数字对照
                     int qian = _lines[1].IndexOf("<");
@@ -322,96 +300,99 @@ namespace 辅助包工具.core
                     RulesNode.KeyValue ls;
                     if (AN1S.TryGetValue(shuzi, out ls))//如果存在
                     {
-                        _keyValue.pair = ls;
-                        ls.pair = _keyValue;//互相配对
+                        _kv.pair = ls;
+                        ls.pair = _kv;//互相配对
                         AN1S.Remove(shuzi);//在字典中删除
                     }
                     else//如果不存在
                     {
-                        AN1S.Add(shuzi, _keyValue);//加入字典
+                        AN1S.Add(shuzi, _kv);//加入字典
                     }
                     continue;
                 }
                 BJ = line.IndexOf(ONE);
                 if (BJ != -1)
                 {
-                    string[] _lines = line.Split(new[] { ONE }, StringSplitOptions.None);//分割
-                    RulesNode.KeyValue _keyValue = new RulesNode.KeyValue();
-                    _keyValue.Raw_string = line;//添加原始字符串
-                    _keyValue.Raw_int = i;//添加原始位置
-                    _keyValue.Test = _lines[1];//添加名称
-                    _keyValue.Type = RulesNode.ONE;//添加类型
-                    string[] Keys = _lines[0].Split('=');//分离键值对
-                    _keyValue.Key = Keys[0];//添加键
-                    _keyValue.Value = Keys[1].Trim();//添加值
-                    DanQian.Values.Add(_keyValue);
+                    var _kv = DisRules_Fuzhu(line, i, ONE, RulesNode.ONE);
+                    DanQian.Values.Add(_kv);
                     continue;
                 }
                 BJ = line.IndexOf(YN);
                 if (BJ != -1)
                 {
-                    string[] _lines = line.Split(new[] { YN }, StringSplitOptions.None);//分割
-                    RulesNode.KeyValue _keyValue = new RulesNode.KeyValue();
-                    _keyValue.Raw_string = line;//添加原始字符串
-                    _keyValue.Raw_int = i;//添加原始位置
-                    _keyValue.Test = _lines[1];//添加名称
-                    _keyValue.Type = RulesNode.YN;//添加类型
-                    string[] Keys = _lines[0].Split('=');//分离键值对
-                    _keyValue.Key = Keys[0];//添加键
-                    _keyValue.Value = Keys[1].Trim();//添加值
-                    DanQian.Values.Add(_keyValue);
+                    var _kv = DisRules_Fuzhu(line, i, YN, RulesNode.YN);
+                    DanQian.Values.Add(_kv);
                     continue;
                 }
                 BJ = line.IndexOf(TF);
                 if (BJ != -1)
                 {
-                    string[] _lines = line.Split(new[] { TF }, StringSplitOptions.None);//分割
-                    RulesNode.KeyValue _keyValue = new RulesNode.KeyValue();
-                    _keyValue.Raw_string = line;//添加原始字符串
-                    _keyValue.Raw_int = i;//添加原始位置
-                    _keyValue.Test = _lines[1];//添加名称
-                    _keyValue.Type = RulesNode.TF;//添加类型
-                    string[] Keys = _lines[0].Split('=');//分离键值对
-                    _keyValue.Key = Keys[0];//添加键
-                    _keyValue.Value = Keys[1].Trim();//添加值
-                    DanQian.Values.Add(_keyValue);
+                    var _kv = DisRules_Fuzhu(line, i, TF, RulesNode.TF);
+                    DanQian.Values.Add(_kv);
                     continue;
                 }
                 BJ = line.IndexOf(INTER);
                 if (BJ != -1)
                 {
-                    string[] _lines = line.Split(new[] { INTER }, StringSplitOptions.None);//分割
-                    RulesNode.KeyValue _keyValue = new RulesNode.KeyValue();
-                    _keyValue.Raw_string = line;//添加原始字符串
-                    _keyValue.Raw_int = i;//添加原始位置
-                    _keyValue.Test = _lines[1];//添加名称
-                    _keyValue.Type = RulesNode.INTER;//添加类型
-                    string[] Keys = _lines[0].Split('=');//分离键值对
-                    _keyValue.Key = Keys[0];//添加键
-                    _keyValue.Value = Keys[1].Trim();//添加值
-                    DanQian.Values.Add(_keyValue);
+                    var _kv = DisRules_Fuzhu(line,i,INTER,RulesNode.INTER);
+                    DanQian.Values.Add(_kv);
                     continue;
                 }
                 BJ = line.IndexOf(BAIFEN);
                 if (BJ != -1)
                 {
-                    string[] _lines = line.Split(new[] { BAIFEN }, StringSplitOptions.None);//分割
-                    RulesNode.KeyValue _keyValue = new RulesNode.KeyValue();
-                    _keyValue.Raw_string = line;//添加原始字符串
-                    _keyValue.Raw_int = i;//添加原始位置
-                    _keyValue.Test = _lines[1];//添加名称
-                    _keyValue.Type = RulesNode.BANFEN;//添加类型
-                    string[] Keys = _lines[0].Split('=');//分离键值对
-                    _keyValue.Key = Keys[0];//添加键
-                    string[] values = Keys[1].Split(',');//分离值列表
-                    _keyValue.Value = values[0];//添加值
-                    DanQian.Values.Add(_keyValue);
+                    var _kv = DisRules_Fuzhu(line, i, BAIFEN, RulesNode.BANFEN);
+                    DanQian.Values.Add(_kv);
                     continue;
                 }
             }
             return result;
         }
-
+        private static RulesNode.KeyValue DisRukes_Fuzhu_AN(string line, int i, string seg, byte type,out string[] lines)
+        {
+            RulesNode.KeyValue result = new RulesNode.KeyValue();
+            string[] _lines = line.Split(new[] { seg }, StringSplitOptions.None);//分割
+            
+            result.Raw_string = line;
+            result.Raw_int = i;
+            result.Test = _lines[1];
+            result.Type = type;
+            result.Exist = true;
+            if (_lines[0].IndexOf(";") != -1)
+            {
+                result.Exist = false;
+            }
+            result.Key = string.Empty;
+            result.Value = _lines[0];
+            lines=_lines;
+            return result;
+        }
+        /// <summary>
+        /// 辅助处理
+        /// </summary>
+        /// <param name="line">行内容</param>
+        /// <param name="i">行号</param>
+        /// <param name="seg">分隔符</param>
+        /// <param name="type">类型</param>
+        /// <returns></returns>
+        private static RulesNode.KeyValue DisRules_Fuzhu(string line,int i,string seg,byte type)
+        {
+            var result = new RulesNode.KeyValue();
+            string[] _lines = line.Split(new[] { seg }, StringSplitOptions.None);//分割
+            result.Raw_string = line;//添加原始字符串
+            result.Raw_int = i;//添加原始位置
+            result.Test = _lines[1];//添加名称
+            result.Type = type;//添加类型
+            string[] Keys = _lines[0].Split('=');//分离键值对
+            result.Key = Keys[0];//添加键
+            result.Value = Keys[1].Trim();//添加值
+            if(seg==BAIFEN)
+            {
+                string[] values = Keys[1].Split(',');//分离值列表
+                result.Value = values[0];//添加值
+            }
+            return result;
+        }
         /// <summary>
         /// 设置Rules
         /// </summary>

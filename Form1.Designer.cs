@@ -63,7 +63,7 @@ namespace 辅助包工具
             this.fuzhubaobenti.Controls.Add(this.button1);
             this.fuzhubaobenti.Location = new System.Drawing.Point(19, 71);
             this.fuzhubaobenti.Name = "fuzhubaobenti";
-            this.fuzhubaobenti.Size = new System.Drawing.Size(250, 413);
+            this.fuzhubaobenti.Size = new System.Drawing.Size(250, 425);
             this.fuzhubaobenti.TabIndex = 0;
             this.fuzhubaobenti.TabStop = false;
             this.fuzhubaobenti.Text = "辅助包其他功能设置";
@@ -216,7 +216,7 @@ namespace 辅助包工具
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(1105, 3);
+            this.button5.Location = new System.Drawing.Point(1085, 3);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(94, 57);
             this.button5.TabIndex = 5;
@@ -229,10 +229,10 @@ namespace 辅助包工具
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Location = new System.Drawing.Point(19, 486);
+            this.richTextBox2.Location = new System.Drawing.Point(19, 502);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(243, 508);
+            this.richTextBox2.Size = new System.Drawing.Size(243, 492);
             this.richTextBox2.TabIndex = 8;
             this.richTextBox2.Text = "";
             // 
