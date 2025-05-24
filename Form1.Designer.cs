@@ -44,12 +44,14 @@ namespace 辅助包工具
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button5 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.fuzhubaobenti.SuspendLayout();
             this.Rulesmod.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // fuzhubaobenti
@@ -61,7 +63,7 @@ namespace 辅助包工具
             this.fuzhubaobenti.Controls.Add(this.button4);
             this.fuzhubaobenti.Controls.Add(this.button2);
             this.fuzhubaobenti.Controls.Add(this.button1);
-            this.fuzhubaobenti.Location = new System.Drawing.Point(19, 71);
+            this.fuzhubaobenti.Location = new System.Drawing.Point(7, 70);
             this.fuzhubaobenti.Name = "fuzhubaobenti";
             this.fuzhubaobenti.Size = new System.Drawing.Size(250, 425);
             this.fuzhubaobenti.TabIndex = 0;
@@ -148,7 +150,7 @@ namespace 辅助包工具
             this.Rulesmod.Location = new System.Drawing.Point(3, 3);
             this.Rulesmod.Name = "Rulesmod";
             this.Rulesmod.SelectedIndex = 0;
-            this.Rulesmod.Size = new System.Drawing.Size(1196, 613);
+            this.Rulesmod.Size = new System.Drawing.Size(1198, 613);
             this.Rulesmod.TabIndex = 3;
             // 
             // tabPage1
@@ -156,7 +158,7 @@ namespace 辅助包工具
             this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1188, 581);
+            this.tabPage1.Size = new System.Drawing.Size(1190, 581);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -178,13 +180,13 @@ namespace 辅助包工具
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RText.Location = new System.Drawing.Point(7, 3);
             this.RText.Name = "RText";
-            this.RText.Size = new System.Drawing.Size(1195, 356);
+            this.RText.Size = new System.Drawing.Size(1197, 357);
             this.RText.TabIndex = 4;
             this.RText.Text = "";
             // 
             // baocun
             // 
-            this.baocun.Location = new System.Drawing.Point(26, 12);
+            this.baocun.Location = new System.Drawing.Point(7, 11);
             this.baocun.Name = "baocun";
             this.baocun.Size = new System.Drawing.Size(238, 53);
             this.baocun.TabIndex = 5;
@@ -197,7 +199,7 @@ namespace 辅助包工具
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(268, 12);
+            this.splitContainer1.Location = new System.Drawing.Point(263, 8);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -209,14 +211,14 @@ namespace 辅助包工具
             // 
             this.splitContainer1.Panel2.Controls.Add(this.button5);
             this.splitContainer1.Panel2.Controls.Add(this.RText);
-            this.splitContainer1.Size = new System.Drawing.Size(1202, 985);
+            this.splitContainer1.Size = new System.Drawing.Size(1204, 986);
             this.splitContainer1.SplitterDistance = 619;
             this.splitContainer1.TabIndex = 6;
             // 
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(1085, 3);
+            this.button5.Location = new System.Drawing.Point(1087, 3);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(94, 57);
             this.button5.TabIndex = 5;
@@ -229,12 +231,26 @@ namespace 辅助包工具
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Location = new System.Drawing.Point(19, 502);
+            this.richTextBox2.Location = new System.Drawing.Point(7, 501);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(243, 492);
+            this.richTextBox2.Size = new System.Drawing.Size(243, 493);
             this.richTextBox2.TabIndex = 8;
             this.richTextBox2.Text = "";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.baocun);
+            this.panel1.Controls.Add(this.splitContainer1);
+            this.panel1.Controls.Add(this.richTextBox2);
+            this.panel1.Controls.Add(this.fuzhubaobenti);
+            this.panel1.Location = new System.Drawing.Point(3, 1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1479, 1006);
+            this.panel1.TabIndex = 9;
             // 
             // Form1
             // 
@@ -242,10 +258,7 @@ namespace 辅助包工具
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1482, 1009);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.baocun);
-            this.Controls.Add(this.fuzhubaobenti);
+            this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "辅助包工具";
@@ -255,6 +268,7 @@ namespace 辅助包工具
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -277,6 +291,7 @@ namespace 辅助包工具
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
