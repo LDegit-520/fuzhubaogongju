@@ -415,7 +415,7 @@ namespace 辅助包工具.core
             }
         }
         
-        /// <summary>
+        /// <summary>thn 
         /// 禁用全部起源
         /// </summary>
         public static void JIN()
