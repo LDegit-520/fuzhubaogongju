@@ -221,7 +221,7 @@ namespace 辅助包工具
             string kv_test = $"键值对{keyValue.Key}  {keyValue.Value}";//键值对区
             string Raw_test = $"原始行:    {keyValue.Raw_int}    {keyValue.Raw_string}";//原始数据区
             Color color = B1;//颜色
-            if (keyValue.Type == RulesNode.AN || keyValue.Type == RulesNode.AN1)//根据是否注释来决定显示的颜色
+            if (keyValue.Type == RulesNode.AN || keyValue.Type == RulesNode.AN1 || keyValue.Type == RulesNode.AN2)//根据是否注释来决定显示的颜色
             {
                 if (!keyValue.Exist)
                 {
@@ -356,6 +356,35 @@ namespace 辅助包工具
                     jiemiangengxin(keyValue.pair, (Panel)pairpanel.Controls["middlePanel"], //关联值界面更新
                         (Label)pairpanel.Controls["middlePanel"].Controls["contentLabel"],
                         (Label)pairpanel.Controls["bottomPanel"].Controls["infoLabel"]);
+                };
+            }
+            if (keyValue.Type == RulesNode.AN2)
+            {
+                keyValue.pair_object = mainPanel;//将自己存储起来
+
+                contentLabel.Click += (s, e) =>
+                {
+                    for(int an2i=0;an2i<keyValue.Listpair.Count;an2i++)//遍历相关项集合
+                    {
+                        RulesNode.KeyValue lskeyvalue = keyValue.Listpair[an2i];//临时引用
+                        lskeyvalue.Exist =!lskeyvalue.Exist;//取反
+                        if (lskeyvalue.Value.StartsWith(";"))
+                        {
+                            lskeyvalue.Value = lskeyvalue.Value.Substring(1);
+                            lskeyvalue.Raw_string = lskeyvalue.Raw_string.Substring(1);
+                            rulesmod.SetRules(lskeyvalue.Raw_int, lskeyvalue.Raw_string);
+                        }
+                        else
+                        {
+                            lskeyvalue.Value = $";{lskeyvalue.Value}";
+                            lskeyvalue.Raw_string = $";{lskeyvalue.Raw_string}";
+                            rulesmod.SetRules(lskeyvalue.Raw_int, lskeyvalue.Raw_string);
+                        }
+                        var pairpanel = ((Panel)lskeyvalue.pair_object);
+                        jiemiangengxin(lskeyvalue, (Panel)pairpanel.Controls["middlePanel"], //界面更新
+                            (Label)pairpanel.Controls["middlePanel"].Controls["contentLabel"],
+                            (Label)pairpanel.Controls["bottomPanel"].Controls["infoLabel"]);
+                    }
                 };
             }
             if(keyValue.Type==RulesNode.ONE)//01的处理

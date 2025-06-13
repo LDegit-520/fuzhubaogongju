@@ -51,6 +51,10 @@ namespace 辅助包工具.core
         /// </summary>
         public static readonly byte BANFEN = 0x09;
         /// <summary>
+        /// 标识符AN2
+        /// </summary>
+        public static readonly byte AN2 = 0x0a;
+        /// <summary>
         /// 区域名称（也就是那个选择栏的选项）
         /// </summary>
         public string Name { get; set; }
@@ -64,11 +68,16 @@ namespace 辅助包工具.core
         public class KeyValue 
         { 
             /// <summary>
+            /// 配对项列表引用（给AN2使用）用于同时操作一系列需要同时开关的选项
+            /// </summary>
+            public List<KeyValue> Listpair {  get; set; } = new List<KeyValue>();
+            /// <summary>
             /// 配对项引用（给AN1使用） 用于引用对应的需要同时关闭的那些
             /// </summary>
             public KeyValue pair {  get; set; }
             /// <summary>
-            /// 给配对项使用（这个是用来在界面上存储对应的控件的）
+            /// 给配对项使用（给AN1使用）（这个是用来在界面上存储对应的控件的）
+            /// 自引用（给AN2使用）（这个是用来在界面上存储对应的控件的）
             /// </summary>
             public object pair_object { get; set; }
             /// <summary>
@@ -315,6 +324,10 @@ namespace 辅助包工具.core
         /// 此标记为百分数数值
         /// </summary> 
         static string BAIFEN = ";=b=;";
+        /// <summary>
+        /// 此标记为启用禁用符，标记这个的会检查后面的标识名同标识名会同时关闭开启
+        /// </summary>
+        static string AN2 = ";=a2=;";
         #endregion
 
         /// <summary>
@@ -325,7 +338,8 @@ namespace 辅助包工具.core
         {
             var result = new Dictionary<string, RulesNode>() { { "NULL", new RulesNode() { Name = "NULL" } } };//添加一个NULL节防止在第一个=re=前有键值对
             RulesNode DanQian = result["NULL"];//初始情况下为NULL 当前遍历=re=节
-            Dictionary<string, RulesNode.KeyValue> AN1S = new Dictionary<string, RulesNode.KeyValue>();//AN1列表
+            Dictionary<string, RulesNode.KeyValue> AN1S = new Dictionary<string, RulesNode.KeyValue>();//AN1字典
+            Dictionary<string,List<RulesNode.KeyValue>> AN2s = new Dictionary<string, List<KeyValue>>();//AN2字典
             for (int i = 0; i < strings.Count; i++)//遍历
             {
                 string line = strings[i];//局部存储遍历变量
@@ -376,6 +390,34 @@ namespace 辅助包工具.core
                     else//如果不存在，也就是说读取到GAREAP了，这个还没有结束
                     {
                         AN1S.Add(shuzi, _kv);//加入字典 也就是上面的AN1字典
+                    }
+                    continue;
+                }
+                BJ = line.IndexOf(AN2);
+                if (BJ != -1)
+                {
+                    string[] _lines;//定义一个临时数组存储
+                    var _kv = DisRukes_Fuzhu_AN(line, i, AN2, RulesNode.AN2, out _lines);//调用处理函数
+                    DanQian.Values.Add(_kv);
+
+                    //处理AN2的标记
+                    int qian = _lines[1].IndexOf("<");
+                    int hou = _lines[1].IndexOf(">");
+                    string biaoshi = _lines[1].Substring(qian + 1, hou - qian - 1); //提取对应标记符
+                                                                                    //例如下面的标记0
+                                                                                    //+=FreezeTimeSpecial        ;=a2=;<时间静止> 时间静止
+                                                                                    //+= FreezeTimeASpecial      ;=a2=;<时间静止> 时间静止
+                                                                                    //+= FreezeTimeBSpecial      ;=a2=;<时间静止> 时间静止
+                                                                                    //+= StardOmegaSpecial       ;=a2=;<时间静止> 时间静止
+                    if (AN2s.ContainsKey(biaoshi))//如果存在，也就是说已经创建过了
+                    {
+                        AN2s[biaoshi].Add(_kv);//添加自己
+                        _kv.Listpair = AN2s[biaoshi];//同步引用
+                    }
+                    else//如果不存在，也就是说字典的键值未创建
+                    {
+                        AN2s.Add(biaoshi, new List<KeyValue>() { _kv });//创建字典并添加包含本项的列表
+                        _kv.Listpair =AN2s[biaoshi];//同步引用
                     }
                     continue;
                 }
